@@ -15,13 +15,14 @@ import com.bumptech.glide.Glide
 import com.cloudinary.android.MediaManager
 import com.cloudinary.android.callback.ErrorInfo
 import com.cloudinary.android.callback.UploadCallback
-import minjarez.oscar.practica12.databinding.ActivityMainBinding
 import minjarez.oscar.practica12.databinding.ActivityRegisterPokemonBinding
 
 class RegisterPokemonActivity : AppCompatActivity() {
 
     private lateinit var btnUploadImage: Button
+    private lateinit var btnRegisterPokemon: Button
     private val uploadPreset: String = "pokedex_upload_preset"
+    private lateinit var imageUri: Uri
 
     private lateinit var binding: ActivityRegisterPokemonBinding
 
@@ -35,9 +36,14 @@ class RegisterPokemonActivity : AppCompatActivity() {
             insets
         }
         binding = ActivityRegisterPokemonBinding.inflate(layoutInflater)
-        this.btnUploadImage = findViewById(R.id.btnUploadImage) as Button
+        this.btnUploadImage = findViewById(R.id.btn_upload_image)
+        this.btnRegisterPokemon = findViewById(R.id.btn_register_pokemon)
         this.btnUploadImage.setOnClickListener {
             this.openGallery()
+        }
+        this.btnRegisterPokemon.setOnClickListener {
+            var request = this.savePokemon()
+            Log.d("Pokemon image id", request)
         }
     }
 
@@ -50,12 +56,12 @@ class RegisterPokemonActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 100 && resultCode == RESULT_OK && data != null) {
-            val imageUri: Uri = data.data as Uri
+            this.imageUri = data.data as Uri
             this.changeImage(imageUri)
         }
     }
 
-    fun changeImage(uri: Uri) {
+    private fun changeImage(uri: Uri) {
         val thumbnail: ImageView = findViewById(R.id.imageView)
         try {
             thumbnail.setImageURI(uri)
@@ -64,9 +70,9 @@ class RegisterPokemonActivity : AppCompatActivity() {
         }
     }
 
-    private fun uploadImage(uri: Uri) {
+    private fun savePokemon(): String {
         val requestId: String = MediaManager.get()
-            .upload(uri)
+            .upload(this.imageUri)
             .unsigned(this.uploadPreset)
             .callback(object : UploadCallback {
                 override fun onSuccess(requestId: String, resultData: Map<*, *>) {
@@ -94,5 +100,6 @@ class RegisterPokemonActivity : AppCompatActivity() {
                 }
             })
             .dispatch()
+        return requestId
     }
 }
