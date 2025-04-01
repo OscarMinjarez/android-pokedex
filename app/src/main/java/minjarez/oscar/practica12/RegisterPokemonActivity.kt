@@ -11,7 +11,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.bumptech.glide.Glide
 import com.cloudinary.android.MediaManager
 import com.cloudinary.android.callback.ErrorInfo
 import com.cloudinary.android.callback.UploadCallback
@@ -22,7 +21,9 @@ class RegisterPokemonActivity : AppCompatActivity() {
     private lateinit var btnUploadImage: Button
     private lateinit var btnRegisterPokemon: Button
     private val uploadPreset: String = "pokedex_upload_preset"
+
     private lateinit var imageUri: Uri
+    private lateinit var imagePublicUrl: String
 
     private lateinit var binding: ActivityRegisterPokemonBinding
 
@@ -77,10 +78,7 @@ class RegisterPokemonActivity : AppCompatActivity() {
             .callback(object : UploadCallback {
                 override fun onSuccess(requestId: String, resultData: Map<*, *>) {
                     Log.d("Cloudinary Quickstart", "Upload success");
-                    val url = resultData["secure_url"] as String
-                    runOnUiThread {
-                        Glide.with(getApplicationContext()).load(url).into(binding.imageView)
-                    }
+                    imagePublicUrl = resultData["secure_url"] as String
                 }
 
                 override fun onStart(requestId: String?) {
