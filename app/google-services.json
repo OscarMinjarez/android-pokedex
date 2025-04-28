@@ -1,21 +1,40 @@
 {
   "project_info": {
-    "project_number": "844789239587",
-    "project_id": "practica12-7b6a1",
-    "storage_bucket": "practica12-7b6a1.firebasestorage.app"
+    "project_number": "441612574042",
+    "project_id": "test-login-bdfab",
+    "storage_bucket": "test-login-bdfab.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:844789239587:android:834366145a746b5f210696",
+        "mobilesdk_app_id": "1:441612574042:android:bb32b73aa9095bc0772763",
         "android_client_info": {
-          "package_name": "minjarez.oscar.practica12"
+          "package_name": "minjarez.oscar.mypokedex"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDSIoPhTz324iemBgejR8UtoLH5MrslTaE"
+          "current_key": "AIzaSyAS9TN5FO9XzEOd2BX_MPjj8Kzv5WYhQUY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:441612574042:android:98306dd233d66274772763",
+        "android_client_info": {
+          "package_name": "minjarez.oscar.practicaautenticacionminjarezo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAS9TN5FO9XzEOd2BX_MPjj8Kzv5WYhQUY"
         }
       ],
       "services": {
